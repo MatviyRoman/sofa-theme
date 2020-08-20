@@ -1,2 +1,2 @@
-# sofa-theme
-sofa-theme
+# wp sofa-theme
+wp sofa-theme
