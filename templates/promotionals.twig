@@ -1,0 +1,29 @@
+{% block content %}
+	{% for promo in promotionals %}
+		{% if promo._crb_akcia %}
+			<div class="category-wrapper col-6 col-md-4 col-lg-3 mb-4 tease tease-{{promo.post_type}}" id="tease-{{post.ID}}">
+				<div class="category">
+					<div class="category-thumb">
+						<a href="{{ promo.link }}" title="{{promo.title}}">
+							{% if promo.get_thumbnail %}
+								<img src="{{promo.thumbnail.src}}"/>
+							{% else %}
+								<img class="single-product-img--default img-fluid" src="{{ site.url }}/img/default.png">
+							{% endif %}
+							{% if promo._crb_akcia %}
+								<span class="akcia">АКЦІЙНИЙ ТОВАР</span>
+							{% endif %}
+						</a>
+					</div>
+					<div class="category-info">
+						<h4>
+							<a class="category-text" href="{{ promo.link }}">
+								{{ promo.title }}</a>
+						</h4>
+					</div>
+				</div>
+			</div>
+			{# <img src="{{akcia.thumbnail.src|resize(255, 338.53)}}" alt="product images"><p>{{ akcia.terms('category') | join(', ') }}</p> #}
+		{% endif %}
+	{% endfor %}
+{% endblock %}

@@ -1,0 +1,26 @@
+{# {% block content %} #}
+<div class="category-wrapper col-6 col-md-4 col-lg-3 mb-4 tease tease-{{post.post_type}}" id="tease-{{post.ID}}">
+	<div class="category">
+		<div class="category-thumb">
+			<a href="{{ post.link }}" title="{{post.title}}">
+				{% if post.get_thumbnail %}
+					<img src="{{post.thumbnail.src}}"/>
+				{% else %}
+					<img class="single-product-img--default img-fluid" src="{{ site.url }}/img/default.png">
+				{% endif %}
+				{% if post._crb_akcia %}
+					<span class="akcia">АКЦІЙНИЙ ТОВАР</span>
+				{% endif %}
+			</a>
+		</div>
+		<div class="category-info">
+			<h4>
+				<a class="category-text" href="{{ post.link }}">
+					{{ post.title }}</a>
+			</h4>
+		</div>
+	</div>
+</div>
+
+{{ dump(job) }}
+{# {% endblock %} #}

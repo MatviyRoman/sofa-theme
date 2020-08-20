@@ -1,0 +1,37 @@
+<footer class="footer container-fluid">
+	<div class="footer-wrapper row">
+		<div class="col-md footer-left{% if block.phone2 %}--before{% endif %}">
+			<p>
+				<a class="footer-link" href="tel:{{ block.phone1 }}">{{ block.phone1 }}</a>
+				{% if block.phone2 %}
+					<br>
+					<a class="footer-link" href="tel:{{ block.phone2 }}">{{ block.phone2 }}</a>
+				{% endif %}
+			</p>
+		</div>
+
+
+		<div class="col-md footer-center">
+			{% for social in block.socials %}
+				<a class="footer-link--social" href="{{ social.url }}"><img src="{{ social.image }}" alt=""></a>
+			{% endfor %}
+		</div>
+		<div class=" col-md footer-right">
+			<a class="footer-link" href="#">{{ block.address }}</a><br>
+		</div>
+	</div>
+	{# 2020 #}
+	<ul class="footer-copyright">
+		<li>©
+			{{"now"|date('Y')}}</li>
+		<li>
+			<a class="footer-copyright-link" href="{{ site.url }}">{{ site.description }}</a>
+		</li>
+		<li>усі права захищено</li>
+		<li>
+			<a href="https://programist.top">дизайн і розробка: Студія
+				<span>«Programist.Top»</span>
+			</a>
+		</li>
+	</ul>
+</footer>

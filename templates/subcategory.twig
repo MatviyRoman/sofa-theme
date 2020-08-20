@@ -1,0 +1,7 @@
+{% for item in items %}
+	<h4>
+		<a class="subcategory-item" target="{{ item.target }}" href="{{ item.link }}">
+			{{ item.title }}</a>
+		{% include "subcategory.twig" with {'items': item.children} %}
+	</h4>
+{% endfor %}

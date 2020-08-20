@@ -1,0 +1,28 @@
+{# This file demonstrates using most of the index.twig template and modifying 
+   just a small part. See `search.twig` for an example of another approach #}
+
+{% extends "index.twig" %}
+
+{% block content %}
+	<div class="container marketing block">
+		<div class="row">
+			{% if wp_title == 'столи' %}
+				<div class="category-subcategory col-6 mb-4">
+					<a href="{{site.url}}/category/stoly/stoly-kukhonni/">Столи кухонні</a><br>
+					<a href="{{site.url}}/category/stoly/stoly-zhurnal-ni/">Столи журнальні</a><br>
+					<a href="{{site.url}}/category/stoly/stoly-kompiuterni/">Столи компютерні</a>
+				</div>
+			{% elseif posts|length == 0 %}
+				<p class="text-center">
+					Товари в цій категорії відсутні
+				</p>
+			{% endif %}
+			<div class="w-100"></div>
+			{% for post in posts %}
+				{% include ['tease-'~post.post_type~'.twig', 'tease.twig'] %}
+			{% endfor %}
+			<div class="w-100"></div>
+			{% include 'partial/pagination.twig' with { pagination: posts.pagination({show_all: false, mid_size: 3, end_size: 2}) } %}
+		</div>
+	</div>
+{% endblock %}

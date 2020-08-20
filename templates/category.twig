@@ -1,0 +1,44 @@
+{% for item in items %}
+	<div class="category-wrapper col-6 col-md-4 col-lg-3 mb-4">
+		<div class="category">
+			<div class="category-thumb">
+				<a target="{{ item.target }}" href="{{ item.link }}">
+					{% if item.title == 'дивани' and block.catimg1 %}
+						<img src="{{ block.catimg1 }}"/>
+					{% elseif item.title == 'шафи-купе' and block.catimg2 %}
+						<img src="{{ block.catimg2 }}"/>
+					{% elseif item.title == 'кухні' and block.catimg3 %}
+						<img src="{{ block.catimg3 }}"/>
+					{% elseif item.title == 'спальні' and block.catimg4 %}
+						<img src="{{ block.catimg4 }}"/>
+					{% elseif item.title == 'вітальні' and block.catimg5 %}
+						<img src="{{ block.catimg5 }}"/>
+					{% elseif item.title == 'передпокої' and block.catimg6 %}
+						<img src="{{ block.catimg6 }}"/>
+					{% elseif item.title == 'дитячі' and block.catimg7 %}
+						<img src="{{ block.catimg7 }}"/>
+					{% elseif item.title == 'столи' and block.catimg8 %}
+						<img src="{{ block.catimg8 }}"/>
+					{% elseif item.title == 'стільці' and block.catimg9 %}
+						<img src="{{ block.catimg9 }}"/>
+					{% elseif item.title == 'комоди і тумби' and block.catimg10 %}
+						<img src="{{ block.catimg10 }}"/>
+					{% elseif item.title == 'матраци' and block.catimg11 %}
+						<img src="{{ block.catimg11 }}"/>
+					{% else %}
+						<img class="single-product-img--default img-fluid" src="{{ site.url }}/img/default.png">
+					{% endif %}
+				</a>
+			</div>
+			<div class="category-info">
+				<h4>
+					<a class="category-text" target="{{ item.target }}" href="{{ item.link }}">
+						{{ item.title }}</a>
+					<div class="subcategory col-12">
+						{% include "subcategory.twig" with {'items': item.children} %}
+					</div>
+				</h4>
+			</div>
+		</div>
+	</div>
+{% endfor %}

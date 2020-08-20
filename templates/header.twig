@@ -1,0 +1,41 @@
+<header class="header">
+	<div class="header-top container-fluid">
+		<div class="row header-wrapper">
+			<div class="col-md header-left">
+				<a class="header-link--ourshop" href="{{site.url}}/nash-mahazyn/">Наш магазин</a>
+				<a class="header-link--menu" id="mobileBtnMenu" href="#"></a>
+			</div>
+			<div class="col-md-6 header-center">
+				<h2 class="header-logo" role="banner">
+					{% if block.site_logo %}
+						<a class="header-link--logo" href="{{site.url}}" rel="home"><img src="{{ block.site_logo }}" alt="{{site.name}}"/></a>
+					{% else %}
+						<a class="header-link--logo" href="{{site.url}}" rel="home">{{site.name}}</a>
+					{% endif %}
+				</h2>
+			</div>
+			<div class="col-md header-right{% if block.phone2 %}--before{% endif %}">
+				<p>
+					<a class="header-link" href="tel:{{ block.phone1 }}">{{ block.phone1 }}</a>
+					{% if block.phone2 %}
+						<br>
+						<a class="header-link" href="tel:{{ block.phone2 }}">{{ block.phone2 }}</a>
+						{# <a class="header-link" href="tel:0984234445">(098) 423-44-45</a> #}
+					{% endif %}
+				</p>
+				<a href="{{ site.url }}/nash-mahazyn">{{ block.address }}</a><br>
+
+				{% for social in block.socials %}
+					<a class="header-link--social" href="{{ social.url }}"><img src="{{ social.image }}" alt=""></a>
+				{% endfor %}
+
+				{# <a class="header-link--social" href="http://instagram.com/meblevi_krai"><img src="/img/instagram.png" alt=""></a>
+																																								<a class="header-link--social" href="https://www.facebook.com/meblevuikrai.com.ua"><img src="/img/facebook.png" alt=""></a> #}
+			</div>
+			{# <h1 class="header-logo" role="banner">																							<a class="header-logo-link" href="{{site.url}}" rel="home">{{site.name}}</a></h1> #}
+		</div>
+	</div>
+	<nav class="menu container-fluid" role="navigation">
+		{% include "menu.twig" with {'items': menu.get_items} %}
+	</nav>
+</header>

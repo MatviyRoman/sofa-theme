@@ -1,0 +1,169 @@
+{% extends "base.twig" %}
+
+{% block content %}
+	<div class="container">
+		<div class="row">
+			<div class="col-12">
+				<article
+					class="single-product single-product-type-{{ post.post_type }}" id="products-{{ post.ID }}">
+					{# <img src="{{ post.thumbnail.src|resize(1200, 300) }}"> #}
+					<div class="single-product-wrapper row">
+						<div class="single-product-img col-lg-6 col-md-6 col-12 mt-5">
+							{% if post.thumbnail.src %}
+								<img class="img-fluid" src="{{ post.thumbnail.src }}">
+							{% else %}
+								<img class="single-product-img--default img-fluid" src="{{ site.url }}/img/default.png">
+							{% endif %}
+							{% if post._crb_akcia %}
+								<span class="akcia">АКЦІЙНИЙ ТОВАР</span>
+							{% endif %}
+						</div>
+						<section class="article-content col-lg-6 col-md-6 col-12 mt-5">
+							<h1 class="article-h1">Товар:
+								{{ post.title }}</h1>
+							<p>ID товару:
+								<b>{{ post.id }}</b>
+							</p>
+							<p>Ціна:
+								<b>{{ post._crb_price }}</b>
+							</p>
+							<p>Категорія:
+								{{ post.terms('category') | join(', ') }}</p>
+							<time datetime="Дата добавлення товару: {{ post.date|date('Y-m-d H:i:s') }}">Дата добавлення товару:
+								{{ post.date }}</time>
+							{# {{ post.parent }}#}
+							{# <p class="blog-author"><a href="{{post.author.path}}">{{ post.author.name }}</a><span>&bull;</span></p> #}
+							<p
+								class="mt-4">
+								{# <a href="{{ post.link }}">{{ _e('edit') }}</a>{{ function('edit_post_link', 'Edit', '<span class="edit-link">', '</span>', post.id) }} #}
+								{% if user %}
+									<a class="edit-btn" target="_blank" href="{{ site.url }}/wp-admin/post.php?post={{ post.id }}&amp;action=edit">Редагувати товар</a>
+								{% endif %}
+							</p>
+						</div>
+						<div class="w-100"></div>
+						<section class="article-content mt-4 mb-5">
+							<div class="article-content-wrapper row">
+								<div class="col-lg-5 col-md">
+									<div class="article-features row">
+										<div class="article-content-title article-content-line col-12 mb-3">
+											Характеристики
+										</div>
+										{% if post._crb_1 %}
+											<div class="article-body-item col-8">
+												Ширина:
+											</div>
+											<div class="article-body-item col-4">{{ post._crb_1 }}</div>
+											<div class="w-100"></div>
+										{% endif %}
+										{% if post._crb_2 %}
+											<div class="article-body-item col-8">
+												Висота:
+											</div>
+											<div class="article-body-item col-4">{{ post._crb_2 }}</div>
+											<div class="w-100"></div>
+										{% endif %}
+										{% if post._crb_3 %}
+											<div class="article-body-item col-8">
+												Глибина:
+											</div>
+											<div class="article-body-item col-4">{{ post._crb_3 }}</div>
+										{% endif %}
+										{% if post._crb_4 %}
+											<div class="w-100"></div>
+											<div class="article-body-item col-8">
+												Довжина:
+											</div>
+											<div class="article-body-item col-4">{{ post._crb_4 }}</div>
+											<div class="w-100"></div>
+										{% endif %}
+										{% if post._crb_5 %}
+											<div class="article-body-item col-8">
+												Спальне місце:
+											</div>
+											<div class="article-body-item col-4">{{ post._crb_5 }}</div>
+											<div class="w-100"></div>
+										{% endif %}
+										{% if post._crb_6 %}
+											<div class="article-body-item col-8">
+												Механізм трансформації:
+											</div>
+											<div class="article-body-item col-4">{{ post._crb_6 }}</div>
+											<div class="w-100"></div>
+										{% endif %}
+										{% if post._crb_7 %}
+											<div class="article-body-item col-8">
+												Матеріал фасаду:
+											</div>
+											<div class="article-body-item col-4">{{ post._crb_7 }}</div>
+											<div class="w-100"></div>
+										{% endif %}
+										{% if post._crb_8 %}
+											<div class="article-body-item col-8">
+												Колір:
+											</div>
+											<div class="article-body-item col-4">{{ post._crb_8 }}</div>
+											<div class="w-100"></div>
+										{% endif %}
+										{% if post._crb_9 %}
+											<div class="article-body-item col-8">
+												Наявність:
+											</div>
+											<div class="article-body-item col-4">{{ post._crb_9 }}</div>
+											<div class="w-100"></div>
+										{% endif %}
+										{% if post._crb_10 %}
+											<div class="article-body-item col-8">
+												Виробник:
+											</div>
+											<div class="article-body-item col-4">{{ post._crb_10 }}</div>
+										{% endif %}
+									</div>
+								</div>
+								<div class="article-body col-lg-6 col-md ml-lg-3 ml-0 mt-md-0 mt-4">
+									<div class="row">
+										<div class="article-body-title col-12 mb-3">
+											Опис
+										</div>
+										<div class="article-body-content col-12 mb-3">
+											{{ post._crb_textarea }}
+										</div>
+									</div>
+								</div>
+							</section>
+						</div>
+					</article>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	{# {{dump(post)}} #}
+
+	<!-- comment box -->
+	{% if post.comment_status == "open1" %}
+		{# {% if post.comments %} #}
+		<section
+			class="comment-box container">
+			<!-- comments -->
+			<div class="comments">
+				<h3>
+					коментарі
+				</h3>
+				{% for cmt in post.comments %}
+					{% include "comment.twig" with {comment:cmt} %}
+				{% endfor %}
+				{% if post.comment_status == "closed" %}
+					{# <p>comments for this post are closed</p> #}
+				{% else %}
+					<!-- comment form -->
+					{% include "comment-form.twig" %}
+				{% endif %}
+			</div>
+		</section>
+	{% endif %}
+
+	{# {% include 'publication.twig' ignore missing %} #}
+
+{% endblock %}

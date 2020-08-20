@@ -1,0 +1,33 @@
+{% extends "base.twig" %}
+
+
+{% block content %}
+	{% if fn('is_front_page') %}
+		{% if block.slider_title %}
+			<div class="container marketing block">
+				<h2 class="col-12 block-title mb-5">
+					{{ block.slider_title }}
+				</h2>
+				<div class="slider-wrappert" id="slider">{% include "promotionals.twig" %}
+				{# {% for akcia in posts %}{% if akcia._crb_akcia %}{% include ['tease-'~post.post_type~'.twig', 'tease.twig'] %}{% endif %}{% endfor %} #}
+					{# {% for akcia in posts %} #}
+					{# {% if akcia._crb_akcia %} #}
+					{# {% include ['tease-'~post.post_type~'.twig', 'tease.twig'] %} #}
+					{# {% endif %} #}
+					{# {% endfor %} #}
+				</div>
+			</div>
+		{% endif %}
+	{% endif %}
+
+	{% if fn('is_front_page') %}
+		<div class="container marketing block">
+			<div class="row">
+				<h2 class="col-12 block-title mb-5">
+					КАТЕГОРІЇ
+				</h2>
+				{% include "category.twig" with {'items': menu.get_items} %}
+			</div>
+		</div>
+	{% endif %}
+{% endblock %}

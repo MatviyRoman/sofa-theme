@@ -1,0 +1,37 @@
+<h2>{{ post.title }}</h2>
+<h3>Суміжні товари</h3>
+{% for term in post.terms('category') %}
+	<h3>Related Posts in
+		{{ term.name }}</h3>
+	<div class="container">
+		<div class="row">
+
+
+			{% for child_post in term.posts(4) %}
+				{# <li>																																			<a href="{{ child_post.link }}">{{ child_post.title }}</a>																																			</li> #}
+
+				<div class="category-wrapper col-6 col-md-4 col-lg-3 mb-4">
+					<div class="category">
+						<div class="category-thumb">
+							<a target="{{ child_post.link }}" href="{{ child_post.link }}">
+								{% if child_post.thumbnail.src %}
+									{# <img src="{{child_post.thumbnail.src|resize(1200, 300)}}" alt="product images"> #}
+									<img src="{{child_post.thumbnail.src|resize(255, 338.53)}}" alt="product images">
+								{% else %}
+									<img src="/img/9.jpg" alt="product images">
+								</a>
+							{% endif %}
+
+						</div>
+						<div class="category-info">
+							<h4>
+								<a class="category-text" target="{{ child_post.link }}" href="{{ child_post.link }}">
+									{{ child_post.title }}</a>
+							</h4>
+						</div>
+					</div>
+				</div>
+			{% endfor %}
+		</div>
+	</div>
+{% endfor %}
